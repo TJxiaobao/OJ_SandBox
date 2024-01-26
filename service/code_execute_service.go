@@ -10,16 +10,21 @@ import (
 	"github.com/docker/docker/api/types/network"
 	"github.com/docker/docker/client"
 	"github.com/gin-gonic/gin"
+	"log"
 )
-
-func CodeExecute(c *gin.Context) {
-	// 判断请求是否具有风险
-
-}
 
 // RunCodeByDocker
 // 操作docker执行代码
 func RunCodeByDocker(c *gin.Context) {
+	// 判断请求是否合规
+	req := c.Request
+	authHeader := req.Header.Get(constant.AUTH_REQUEST_HEADER)
+	if authHeader != constant.AUTH_REQUEST_SECRET {
+		log.Print("密钥错误！")
+		c.JSON(400, "密钥错误，请重试！")
+		return
+	}
+
 	// 获取请求参数
 	cmd := cqe.CodeRequestCmd{}
 	if err := c.BindJSON(&cmd); err != nil {

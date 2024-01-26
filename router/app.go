@@ -10,7 +10,7 @@ func Router() *gin.Engine {
 
 	// 执行路由
 	r.GET("/test") // 后期可能用于集群判断
-	r.POST("/code_execute", service.CodeExecute)
+	r.POST("/code_execute", service.RunCodeByDocker)
 
 	return r
 }
