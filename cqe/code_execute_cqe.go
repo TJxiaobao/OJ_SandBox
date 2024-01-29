@@ -14,9 +14,6 @@ func (c *CodeRequestCmd) Validate() error {
 	if c.Language == "" {
 		return errno.NewSimpleBizError(errno.ErrMissingParameter, nil, "language")
 	}
-	if c.Input == "" {
-		return errno.NewSimpleBizError(errno.ErrMissingParameter, nil, "input")
-	}
 	if c.Code == "" {
 		return errno.NewSimpleBizError(errno.ErrMissingParameter, nil, "code")
 	}
